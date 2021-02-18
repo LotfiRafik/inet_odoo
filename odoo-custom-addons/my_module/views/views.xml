@@ -1,0 +1,203 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+
+<!-- Course Views -->
+
+        <record model="ir.ui.view" id="course_form_view">
+            <field name="name">course.form</field>
+            <field name="model">my_module.course</field>
+            <field name="arch" type="xml">
+                <form string="Course Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+<!--                            <field name="description"/>-->
+                            <field name="responsible_id"/>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description"/>
+                            </page>
+                            <page string="Sessions">
+                                <field name="session_ids">
+                                    <tree string="Registered sessions">
+                                        <field name="name"/>
+                                        <field name="instructor_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="About">
+                                This is an example of notebooks
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+
+    <record model="ir.ui.view" id="my_module.list">
+      <field name="name">my_module list</field>
+      <field name="model">my_module.course</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="description"/>
+        </tree>
+      </field>
+    </record>
+
+
+
+        <record model="ir.ui.view" id="course_search_view">
+            <field name="name">course.search</field>
+            <field name="model">my_module.course</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <filter name="my_courses" string="My Courses"
+                            domain="[('responsible_id', '=', uid)]"/>
+                    <group string="Group By">
+                        <filter name="by_responsible" string="Responsible"
+                                context="{'group_by': 'responsible_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+<!-- Session Views -->
+
+
+        <!-- session form view -->
+        <record model="ir.ui.view" id="session_form_view">
+            <field name="name">session.form</field>
+            <field name="model">my_module.session</field>
+            <field name="arch" type="xml">
+                <form string="Session Form">
+                    <sheet>
+                        <group>
+                            <group string="General">
+                                <field name="course_id"/>
+                                <field name="name"/>
+                                <field name="instructor_id"/>
+                            </group>
+                            <group string="Schedule">
+                                <field name="start_date"/>
+                                <field name="duration"/>
+                                <field name="seats"/>
+                                <field name="taken_seats" widget="progressbar"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        <label for="attendee_ids"/>
+                        <field name="attendee_ids" widget="many2manytags"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+<!--         session tree/list view -->
+        <record model="ir.ui.view" id="session_tree_view">
+            <field name="name">session.tree</field>
+            <field name="model">my_module.session</field>
+            <field name="arch" type="xml">
+<!--                <tree string="Session Tree">-->
+                <tree string="Session Tree" decoration-bf="duration&lt;5" decoration-it="duration&gt;15">
+                    <field name="name"/>
+                    <field name="course_id"/>
+                    <field name="duration" invisible="1"/>
+<!--                    <field name="taken_seats" widget="progressbar"/>-->
+                </tree>
+            </field>
+        </record>
+
+         <!-- calendar view -->
+        <record model="ir.ui.view" id="session_calendar_view">
+            <field name="name">session.calendar</field>
+            <field name="model">my_module.session</field>
+            <field name="arch" type="xml">
+                <calendar string="Session Calendar" date_start="start_date" date_stop="end_date" color="instructor_id">
+                    <field name="name"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="session_gantt_view">
+            <field name="name">session.gantt</field>
+            <field name="model">my_module.session</field>
+            <field name="arch" type="xml">
+                <gantt string="Session Gantt"
+                       date_start="start_date" date_stop="end_date"
+                       default_group_by='instructor_id'>
+                </gantt>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="openacademy_session_pivot_view">
+            <field name="name">openacademy.session.pivot</field>
+            <field name="model">my_module.session</field>
+            <field name="arch" type="xml">
+                <pivot string="Participations by Courses">
+                    <field name="course_id" type="row"/>
+                    <field name="instructor_id" type="row"/>
+                    <field name="name" type="col"/>
+                    <field name="attendees_count" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="openacademy_session_graph_view">
+            <field name="name">my_module.session.graph</field>
+            <field name="model">my_module.session</field>
+            <field name="arch" type="xml">
+                <graph string="Participations by Courses">
+                    <field name="course_id"/>
+                    <field name="attendees_count" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="course_list_action">
+      <field name="name">Courses</field>
+      <field name="res_model">my_module.course</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="session_list_action">
+        <field name="name">Sessions</field>
+        <field name="res_model">my_module.session</field>
+        <field name="view_mode">tree,form,calendar,pivot,graph</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+
+
+
+
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="my_module" id="my_module.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Open Academy" id="my_module.menu_1" parent="my_module.menu_root"/>
+
+    <!-- actions -->
+    <menuitem name="Courses" id="my_module.menu_1_courses"  parent="my_module.menu_1" action="course_list_action"/>
+    <menuitem name="Sessions" id="my_module.menu_1_sessions"  parent="my_module.menu_1" action="session_list_action"/>
+
+
+  </data>
+</odoo>

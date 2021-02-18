@@ -1,0 +1,79 @@
+<odoo>
+    <data>
+        
+        <!-- Begin Module Views -->
+
+        <!-- Patient Search View -->
+
+        <record model="ir.ui.view" id="patient_search">
+            <field name="name">Patient Search</field>
+            <field name="model">hospital.patient</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="patient_age"/>
+                    <field name="notes"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Patient Form View -->
+
+        <record model="ir.ui.view" id="patient_form">
+            <field name="name">Patient Form</field>
+            <field name="model">hospital.patient</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="name"/>
+                    <field name="patient_age"/>
+                    <field name="notes"/>
+                    <field name="image"/>
+                    <div class="oe_chatter">
+                        <field name="message_ids"/>
+                        <field name="activity_ids" />
+                        <field name="message_follower_ids" options="{'open_attachments': True}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Patient Tree View -->
+        
+        <record model="ir.ui.view" id="patient_tree">
+            <field name="name">Patient List</field>
+            <field name="model">hospital.patient</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="patient_age"/>
+                    <field name="notes"/>
+                    <field name="image"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- End Module Views -->
+
+        <!-- Begin Module Actions -->
+
+        <record model="ir.actions.act_window" id="action_patient">
+            <field name="name">Patient List</field>
+            <field name="res_model">hospital.patient</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- End Module Actions -->
+
+    
+        <!-- Begin Module Menus -->
+
+        <!-- Root Menu  -->
+        <menuitem name="Hospital" id="hospital_menu_root"  />
+
+        <!-- Patient Menu -->
+        <menuitem name="Patients" id="hospital_menu_patients" parent="hospital_menu_root" action="action_patient"/>
+
+        <!-- End Module Menus -->
+
+    </data>
+</odoo>

@@ -92,3 +92,8 @@ msgstr "Catégories..."
 #, python-format
 msgid "You can not create recursive tags."
 msgstr "Vous ne pouvez pas créer de catégories récursives."
+
+#. module: base
+#: model_terms:ir.ui.view,arch_db:base.view_res_partner_filter
+msgid "Tag"
+msgstr "Catégorie"

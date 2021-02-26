@@ -8,6 +8,8 @@ _logger = logging.getLogger(__name__)
 class Partner(models.Model):
     _inherit = 'res.partner'
     
+    employee_id = fields.Many2one('hr.employee', string='Related employee', index=True)
+
     @api.model
     def default_get(self, default_fields):
         """Set Algeria as default country of a partner"""
@@ -21,3 +23,6 @@ class PartnerCategory(models.Model):
 
     #Changing original String of the field "name" from 'Tag Name' To 'Category Name'
     name = fields.Char(string='Category Name', required=True, translate=True)
+
+
+    

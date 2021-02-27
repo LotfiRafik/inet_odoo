@@ -9,7 +9,7 @@ class Users(models.Model):
 
     @api.model
     def default_get(self, default_fields):
-        """Set Algeria as default country of a partner"""
+        """Set parent_id of the partner related to the user to the default partner of the main company"""
         values = super().default_get(default_fields)
         values['parent_id'] = 1
         return values

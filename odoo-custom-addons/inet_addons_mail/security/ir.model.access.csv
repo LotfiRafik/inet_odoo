@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_inet_addons_mail_inet_addons_mail,inet_addons_mail.inet_addons_mail,model_inet_addons_mail_inet_addons_mail,base.group_user,1,1,1,1

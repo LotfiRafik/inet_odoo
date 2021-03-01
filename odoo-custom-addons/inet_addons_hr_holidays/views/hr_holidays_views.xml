@@ -26,5 +26,11 @@
         sequence="3"
         groups="hr_holidays.group_hr_holidays_responsible"/>
 
+    <menuitem
+        id="hr_holidays.menu_hr_holidays_report"
+        name="Reporting"
+        parent="hr_holidays.menu_hr_holidays_root"
+        groups="hr_holidays.group_hr_holidays_responsible"
+        sequence="4"/>
 
 </odoo>

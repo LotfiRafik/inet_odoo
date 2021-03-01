@@ -33,4 +33,13 @@
         groups="hr_holidays.group_hr_holidays_responsible"
         sequence="4"/>
 
+
+    <menuitem
+        id="hr_holidays.hr_holidays_menu_manager_approve_allocations"
+        name="Allocations"
+        parent="hr_holidays.menu_hr_holidays_approvals"
+        action="hr_holidays.hr_leave_allocation_action_approve_department"
+        sequence="2"
+        groups="hr_holidays.group_hr_holidays_manager"/>
+
 </odoo>

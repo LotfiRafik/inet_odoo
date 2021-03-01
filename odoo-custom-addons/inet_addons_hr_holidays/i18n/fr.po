@@ -37,4 +37,4 @@ msgstr "Mes demandes de congés"
 #. module: hr_holidays
 #: model:ir.ui.menu,name:hr_holidays.menu_open_allocation
 msgid "My Allocation Requests"
-msgstr "Mes demandes d'allocations"
+msgstr "Mes Allocations"

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<odoo>
+	
+    <record id="hr_holidays.hr_leave_allocation_action_my" model="ir.actions.act_window">
+        <field name="name">My Allocations</field>
+        <field name="res_model">hr.leave.allocation</field>
+        <field name="view_mode">tree,kanban,form,activity</field>
+        <field name="search_view_id" ref="hr_holidays.hr_leave_allocation_view_search_my"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new time off allocation request
+            </p><p>
+                Time Off Officers allocate time off days to employees (e.g. paid time off).<br/>
+                Employees request allocations to Time Off Officers (e.g. recuperation days).
+            </p>
+        </field>
+        <field name="context">{'create':0}</field>
+        <field name="domain">[('employee_id.user_id', '=', uid)]</field>
+    </record>
+
+    <menuitem
+        id="hr_holidays.menu_hr_holidays_approvals"
+        name="Managers"
+        parent="hr_holidays.menu_hr_holidays_root"
+        sequence="3"
+        groups="hr_holidays.group_hr_holidays_responsible"/>
+
+
+</odoo>

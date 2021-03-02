@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="hr_recruitment.create_job_simple" model="ir.actions.act_window">
+            <field name="name">Create a Job Position</field>
+            <field name="res_model">hr.job</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="hr.view_hr_job_form"/>
+            <field name="target">new</field>
+        </record>
+    
+    </data>
+</odoo>
